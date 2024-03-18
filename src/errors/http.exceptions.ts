@@ -1,6 +1,6 @@
 import createError from "http-errors";
 import { HTTPStatusCode } from "./HttpCode.enum";
-import { HTTPMessages } from "./httpMessages";
+import { HTTPMessages } from "./HttpMessages";
 
 export class BadRequestException {
   constructor(message = HTTPMessages.BAD_REQUEST) {

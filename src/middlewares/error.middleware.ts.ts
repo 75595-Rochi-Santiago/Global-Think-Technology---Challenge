@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import HttpException from "../exceptions/HttpException";
 import { HTTPStatusCode } from "../errors/HttpCode.enum";
-import { HTTPMessages } from "../errors/httpMessages";
+import { HTTPMessages } from "../errors/HttpMessages";
 
 export default function errorMiddleware(
   error: HttpException,
