@@ -2,6 +2,7 @@ import { HTTPStatusCode } from "../errors/HttpCode.enum";
 import { User } from "../entities/user.entity";
 import UserStore from "../storage/userStore";
 import createError from "http-errors";
+import { BadRequestException } from "../errors/Http.exceptions";
 
 export default class UserService {
   private storage = UserStore.getStorage();
@@ -24,6 +25,9 @@ export default class UserService {
     email?: string,
     age?: string,
   ): Promise<User> {
+    if (!id) {
+      throw new BadRequestException();
+    }
     if (email) {
       if (!this.storage.isValidateEmail(email, id)) {
         throw createError(HTTPStatusCode.Conflict, "Email alredy exists");
@@ -32,6 +36,9 @@ export default class UserService {
     return this.storage.updateUserByID(id, name, email, age);
   }
   public async deleteUser(id: number): Promise<User> {
+    if (!id) {
+      throw new BadRequestException();
+    }
     return this.storage.deleteUser(id);
   }
 }

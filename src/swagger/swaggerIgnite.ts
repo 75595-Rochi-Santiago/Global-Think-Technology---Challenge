@@ -4,29 +4,22 @@ import { Application } from "express";
 
 function swaggerIgnite(applicationInstance: Application) {
   const { PORT, APP_PATH } = process.env;
-  // Swagger definition
   const swaggerDefinition = {
     info: {
-      title: "Prueba Técnica Global Think Tecnology", // Title of the documentation
-      version: "1.0.0", // Version of the app
-      description: "This is the REST API for my product", // short description of the app
+      title: "Prueba Técnica Global Think Tecnology",
+      version: "1.0.0",
     },
-    host: APP_PATH + ":" + PORT, // the host or url of the app
-    basePath: "/", // the basepath of your endpoint
-    schemes: ["https", "http"],
+    host: APP_PATH + ":" + PORT,
+    basePath: "/",
+    schemes: ["http"],
   };
 
-  // options for the swagger docs
   const options = {
-    // import swaggerDefinitions
     swaggerDefinition,
-    // path to the API docs
     apis: ["./src/swagger/docs/**/*.yaml"],
   };
-  // initialize swagger-jsdoc
   const swaggerSpec = swaggerJSDoc(options);
 
-  // use swagger-Ui-express for your app documentation endpoint
   applicationInstance.use(
     "/api-docs",
     swaggerUi.serve,

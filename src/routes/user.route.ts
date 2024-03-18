@@ -4,7 +4,6 @@ import Route from "../interfaces/route.interface";
 import dtoValidationMiddleware from "../middlewares/dtoValidation.middleware";
 import CreateUserDto from "../dtos/createUser.dto";
 import UpdateUser from "../dtos/updateUser.dto";
-import DeleteUser from "../dtos/deleteUser.dto";
 
 export default class UserRoute implements Route {
   public path = "/users";
@@ -16,10 +15,6 @@ export default class UserRoute implements Route {
   }
 
   private initializeRoutes() {
-    this.router.delete(
-      `${this.path}/delete/:id`,
-      this.usersController.getAllUsers,
-    );
     this.router.post(
       `${this.path}`,
       dtoValidationMiddleware(CreateUserDto),
@@ -31,5 +26,6 @@ export default class UserRoute implements Route {
       dtoValidationMiddleware(UpdateUser),
       this.usersController.updateUser,
     );
+    this.router.delete(`${this.path}/:id`, this.usersController.deleteUser);
   }
 }
