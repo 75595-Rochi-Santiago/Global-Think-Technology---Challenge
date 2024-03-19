@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import HttpException from "../exceptions/HttpException";
+import HttpException from "../errors/exceptions/HttpGenericException";
 import { HTTPStatusCode } from "../errors/HttpCode.enum";
 import { HTTPMessages } from "../errors/HttpMessages";
 

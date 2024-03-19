@@ -2,7 +2,7 @@ import { RequestHandler } from "express";
 import { plainToInstance } from "class-transformer";
 import { validate, ValidationError } from "class-validator";
 import { sanitize } from "class-sanitizer";
-import HttpException from "../exceptions/HttpException";
+import HttpException from "../errors/exceptions/HttpGenericException";
 
 function dtoValidationMiddleware(
   type: any,

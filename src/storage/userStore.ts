@@ -42,8 +42,8 @@ export default class UserStore {
     return this.users;
   }
 
-  public findUserByID(id: number): User[] {
-    return this.users.splice(this.findIndexByID(id), 1);
+  public findUserByID(id: number): User {
+    return this.users.find((user) => user.id === id);
   }
 
   public updateUserByID(

@@ -1,10 +1,9 @@
 {
-  "description": "",
+  "description": "Prueba Técnica Global Think Tecnology",
   "scripts": {
-    "start": "ts-node --transpile-only src/server.ts",
+    "start:dev": "ts-node --transpile-only src/server.ts",
     "build": "tsc --build tsconfig.json",
-    "build:watch": "tsc --build tsconfig.json --watch",
-    "start:build": "node dist/server.js",
+    "start": "node dist/server.js",
     "test": "jest --coverage"
   },
   "devDependencies": {

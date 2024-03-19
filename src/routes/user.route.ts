@@ -21,6 +21,7 @@ export default class UserRoute implements Route {
       this.usersController.createUser,
     );
     this.router.get(`${this.path}`, this.usersController.getAllUsers);
+    this.router.get(`${this.path}/:id`, this.usersController.findUserByID);
     this.router.patch(
       `${this.path}/:id`,
       dtoValidationMiddleware(UpdateUser),

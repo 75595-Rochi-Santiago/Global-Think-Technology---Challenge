@@ -1,15 +1,8 @@
 paths:
   /users/:                
-
-    get:                 
-      summary: Listar todos los usuarios
-      produces:
-      - application/json
-      responses:          
-        200:
-          description: Success Message
-
-    post:                 
+    post:
+      tags:             
+      - Endpoints de Usuarios            
       summary: Crear un nuevo usuario
       produces:
       - application/json
@@ -23,9 +16,34 @@ paths:
       responses:          
         201:
           description: An object with user details
-
+    get:       
+      tags:             
+      - Endpoints de Usuarios             
+      summary: Listar todos los usuarios
+      produces:
+      - application/json
+      responses:          
+        200:
+          description: Success Message
   /users/{id}:
+    get:                 
+      tags:             
+      - Endpoints de Usuarios   
+      summary: Obtener un usuario por su ID
+      produces:
+      - application/json
+      parameters:         
+      - in: path          
+        name: id
+        schema:
+          type: integer
+          minimum: 1
+      responses:          
+        200:
+          description: Success Message
     patch:
+      tags:             
+      - Endpoints de Usuarios 
       summary: Actualizar un usuario
       produces:
       - application/json
@@ -44,9 +62,9 @@ paths:
       responses:          
         200:
           description: Success Message  
-
-
     delete:                 
+      tags:             
+      - Endpoints de Usuarios   
       summary: Eliminar un usuario
       produces:
       - application/json
@@ -75,4 +93,3 @@ definitions:
       age:
         type: string
         default: "22"
-

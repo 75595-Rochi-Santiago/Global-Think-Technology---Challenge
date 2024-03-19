@@ -2,7 +2,10 @@ import { HTTPStatusCode } from "../errors/HttpCode.enum";
 import { User } from "../entities/user.entity";
 import UserStore from "../storage/userStore";
 import createError from "http-errors";
-import { BadRequestException } from "../errors/Http.exceptions";
+import {
+  BadRequestException,
+  NotFoundException,
+} from "../errors/exceptions/Http.exceptions";
 
 export default class UserService {
   private storage = UserStore.getStorage();
@@ -16,8 +19,13 @@ export default class UserService {
   public async getAllUsers(): Promise<User[]> {
     return this.storage.getUsers();
   }
-  public async findUserByID(id: number): Promise<User[]> {
-    return this.storage.findUserByID(id);
+  public async findUserByID(id: number): Promise<User> {
+    if (!id) {
+      throw new BadRequestException("id is numeric and required");
+    }
+    const user = this.storage.findUserByID(id);
+    if (!user) throw new NotFoundException("User not found");
+    return user;
   }
   public async updateUser(
     id: number,
@@ -26,18 +34,20 @@ export default class UserService {
     age?: string,
   ): Promise<User> {
     if (!id) {
-      throw new BadRequestException();
+      throw new BadRequestException("id is numeric and required");
     }
     if (email) {
       if (!this.storage.isValidateEmail(email, id)) {
         throw createError(HTTPStatusCode.Conflict, "Email alredy exists");
       }
     }
+    const user = this.storage.findUserByID(id);
+    if (!user) throw new NotFoundException("User not found");
     return this.storage.updateUserByID(id, name, email, age);
   }
   public async deleteUser(id: number): Promise<User> {
     if (!id) {
-      throw new BadRequestException();
+      throw new BadRequestException("id is numeric and required");
     }
     return this.storage.deleteUser(id);
   }
