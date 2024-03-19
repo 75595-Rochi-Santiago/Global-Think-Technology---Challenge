@@ -13,3 +13,8 @@ Ejecutar Build generada (dist)
 
 npm run start:dev
 Generar y ejecutar Build en memoria
+
+
+Documentación (Swagger)
+http://localhost:7979/api-docs/
+
